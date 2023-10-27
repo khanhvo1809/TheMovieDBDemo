@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "B9923FDA-9743-4181-AD3F-069370C0FAAF",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:TheMovieDBDemo.xcodeproj",
+        "identifier" : "F6B4F3862AEA03BC00DF3C23",
+        "name" : "TheMovieDBDemoTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:TheMovieDBDemo.xcodeproj",
+        "identifier" : "F6B4F3902AEA03BC00DF3C23",
+        "name" : "TheMovieDBDemoUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

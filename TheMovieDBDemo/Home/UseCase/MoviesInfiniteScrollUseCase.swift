@@ -14,7 +14,8 @@ protocol IInfiniteScroll {
     var nextPage: Int { get set }
     var data: [T] { get set }
     var onDataChanged: (() -> Void)? { get set }
-    
+    var error: Error? { get set }
+
     func extraQuery() -> [String: String]
     func reloadData()
     func loadMore()
@@ -38,7 +39,8 @@ class MoviesInfiniteScrollUseCase: IInfiniteScroll {
     var hasNextPage: Bool = false
     var data: [T] = []
     var onDataChanged: (() -> Void)?
-    
+    var error: Error?
+
     func extraQuery() -> [String : String] {
         return [:]
     }
@@ -69,7 +71,8 @@ class MoviesInfiniteScrollUseCase: IInfiniteScroll {
             guard let weakSelf = self else { return }
             
             weakSelf.isLoading = false
-            
+            weakSelf.error = nil
+
             switch (result) {
             case let .success(res):
                 // Update next page
@@ -90,6 +93,7 @@ class MoviesInfiniteScrollUseCase: IInfiniteScroll {
                 }
                 break
             case let .failure(err):
+                weakSelf.error = err
                 print("__DEBUG__ err:: \(err)")
                 break
             }
@@ -109,6 +113,7 @@ class MoviesInfiniteScrollUseCase: IInfiniteScroll {
         data = []
         nextPage = 1
         hasNextPage = false
+        error = nil
         
         onDataChanged?()
     }

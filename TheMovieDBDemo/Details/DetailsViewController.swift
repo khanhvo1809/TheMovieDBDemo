@@ -49,7 +49,7 @@ class DetailsViewController: UIViewController {
         let movie = viewModel.getMovieDetails()
         
         guard let movie = movie else {
-            showDetailsError()
+            showError(viewModel.getError())
             return
         }
 
@@ -69,10 +69,10 @@ class DetailsViewController: UIViewController {
         }
     }
 
-    func showDetailsError() {
+    func showError(_ error: Error?) {
         let alertVC = UIAlertController(
             title: "Error",
-            message: "Cannot get movie details. Please check network connection.",
+            message: error?.localizedDescription ?? "Please check network connection.",
             preferredStyle: .alert
         )
         

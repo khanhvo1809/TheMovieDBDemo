@@ -37,7 +37,6 @@ struct SearchMoviesRepository: IMovieListRepository {
         SimpleNetwork.get(
             "https://api.themoviedb.org/3/search/movie",
             queryParams: query,
-            cacheResponse: true,
             completion: completion
         )
     }

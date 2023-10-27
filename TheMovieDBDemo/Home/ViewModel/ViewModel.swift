@@ -46,14 +46,12 @@ class ViewModel {
         // Update mode if needed
         mode = text.count != 0 ? .search : .trending
     }
-//
-//    func reloadData() {
-//        if mode == .search {
-//            self.searchMoviesUseCase.loadData(page: 1)
-//        } else {
-//            self.getTrendingMoviesUseCase.loadData(page: 1)
-//        }
-//    }
+
+    func getError() -> Error? {
+        return mode == .search
+            ? self.searchMoviesUseCase.error
+            : self.getTrendingMoviesUseCase.error
+    }
     
     func loadMore() {
         if mode == .search {

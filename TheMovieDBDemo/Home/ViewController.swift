@@ -61,6 +61,11 @@ class ViewController: UIViewController {
                     DispatchQueue.main.async { [weak self] in
                         guard let weakSelf = self else { return }
                         
+                        if let error = weakSelf.viewModel.getError() {
+                            weakSelf.showError(error)
+                            return
+                        }
+                        
                         weakSelf.tableView.reloadData()
                     }
                 }
@@ -68,6 +73,22 @@ class ViewController: UIViewController {
         )
         viewModel.loadData(page: 1)
         self.viewModel = viewModel
+    }
+
+    func showError(_ error: Error?) {
+        let alertVC = UIAlertController(
+            title: "Error",
+            message: error?.localizedDescription ?? "Please check network connection.",
+            preferredStyle: .alert
+        )
+
+        alertVC.addAction(
+            UIAlertAction(title: "OK", style: .default) { _ in
+                self.dismiss(animated: true)
+            }
+        )
+        
+        present(alertVC, animated: true)
     }
 }
 
